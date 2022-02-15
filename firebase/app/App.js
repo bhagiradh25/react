@@ -1,47 +1,58 @@
-import * as React from 'react';
-import { Button, View, Text,StyleSheet,TextInput,TouchableOpacity} from 'react-native';
+import React, { useState } from "react";
+import { Button, View, Text,StyleSheet,TextInput,TouchableOpacity,} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {Picker} from '@react-native-picker/picker'
+
 
 function HomeScreen({ navigation }) {
   return (
+    
     <View style={styles.rect1}>
     
       <View style={styles.add}>
-      <Button
-        title="Add"
-        onPress={() => navigation.navigate('Details')}
-      />
+      <TouchableOpacity  onPress={() => navigation.navigate('Details')}>
+            <View style={styles.addWrapper}></View>
+            <Text style={styles.addtext}>+</Text>
+      </TouchableOpacity>
+      
       </View>
     </View>
   );
 }
 
 function DetailsScreen(navigation) {
+  const [selectedValue, setSelectedValue] = useState("java")
   return (
     <View style={styles.rect1}>
-   
-    <TextInput
-      placeholder="Select Customer"
-      placeholderTextColor="#788793"
-      style={styles.textInput}
-    ></TextInput>
-    <View style={styles.text2Stack}>
+    <View style={styles.rect2}>
+    <View style={styles.textInput}>
+      <Picker style={styles.textInput}
+        selectedValue={selectedValue}
+       
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue) }
+      >
+        <Picker.Item label="Select " value="java"  />
+        <Picker.Item label="JavaScript" value="js" />
+      </Picker>
+    </View>
   
+
+
       <TextInput
         placeholder="Caputure Width"
         placeholderTextColor="#788793"
         style={styles.textInput3}
       ></TextInput>
-    </View>
     <TextInput
       placeholder="Caputure Heigth"
       placeholderTextColor="rgba(120,135,147,1)"
       secureTextEntry={true}
       style={styles.textInput2}
     ></TextInput>
+    
    
-    <View  >
+    <View style ={styles.text9} >
       <TouchableOpacity
         onPress={() => props.navigation.navigate("Signup")}
         style={styles.button1}
@@ -55,7 +66,10 @@ function DetailsScreen(navigation) {
         <Text style={styles.text5}>Clear</Text>
       </TouchableOpacity>
     </View>
+    
   </View>
+  </View>
+
 
   
   );
@@ -78,33 +92,60 @@ export default App;
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "rgba(230,217,217,1)"
-  },
+  
 
   add: {
-    backgroundColor: "rgba(29,161,242,1)",
+    flex:1,
+    
     width: 100,
     height: 41,
-    marginTop:650,
-    marginLeft:275
+    
+    flexDirection:"row",
+    marginLeft: 'auto',
+    alignItems:'flex-end'
   },
   rect1: {
     flex: 1,
-    backgroundColor: "#141f28"
+    backgroundColor: "white",
+    alignContent:"center",
+    justifyContent: 'center',
+    
   },
   textInput: {
     width: 312,
-    height: 42,
+    height: 60,
+    color: "#1A13E7",
+    borderColor: "#1A13E7",
+    borderRadius:10,
+    padding:10,
+    marginBottom: 10,
+    borderWidth: 1,
+  
+  
+    
+  },
+  textInput2: {
+    width: 313,
+    height: 60,
     color: "#1da1f2",
-    borderColor: "#1da1f2",
-    borderWidth: 0,
-    borderBottomWidth: 2,
-    fontSize: 18,
-    lineHeight: 20,
-    marginTop: 280,
-    marginLeft: 40
+    borderColor:  "#1A13E7",
+    borderWidth: 1,
+    marginTop: 8,
+      
+    borderRadius:10 ,
+    padding:10
+  },
+  textInput3: {
+    top: 0,
+    width: 312,
+    height: 60,
+    color: "#1da1f2",
+    borderColor: "#1A13E7",
+    borderWidth: 1,
+    justifyContent: 'center', alignItems: 'center',
+    borderRadius:10,
+    padding:10,
+   
   },
   text2: {
     top: 4,
@@ -113,76 +154,100 @@ const styles = StyleSheet.create({
     right: 0,
     fontSize: 18,
     lineHeight: 20,
-    marginLeft: 40
+    justifyContent: 'center', alignItems: 'center',
   },
-  textInput3: {
-    top: 0,
-    width: 312,
-    height: 42,
-    color: "#1da1f2",
-    position: "absolute",
-    borderColor: "#1da1f2",
-    borderWidth: 0,
-    borderBottomWidth: 2,
-    fontSize: 18,
-    lineHeight: 20,
-    left: 0
-  },
+  
   text2Stack: {
-    width: 313,
+    width: 312,
     height: 42,
     alignSelf: "flex-end",
     marginTop: 13,
-    marginRight: 31
-  },
-  textInput2: {
-    width: 313,
-    height: 42,
-    color: "#1da1f2",
-    borderColor:  "#1da1f2",
-    borderWidth: 0,
-    borderBottomWidth: 2,
-    fontSize: 18,
-    lineHeight: 20,
-    marginTop: 8,
-    alignSelf: "center"
+    marginRight: 31,
+    justifyContent: 'center', alignItems: 'center',
   },
   
   button1: {
-    backgroundColor: "rgba(29,161,242,1)",
-    borderRadius: 100,
+    backgroundColor: "#1A13E7",
+    borderRadius: 10,
     width: 117,
     height: 41,
-    justifyContent: "center",
-    marginLeft:50,
-    marginTop:10
-
+    justifyContent: 'center', alignItems: 'center',
   },
   text4: {
-    color: "rgba(255,255,255,1)",
+    color: "white",
     fontSize: 24,
-    alignSelf: "center"
+  
+    justifyContent: 'center',
+    justifyContent: 'center', alignItems: 'center',
   },
   button2: {
     height: 41,
-    backgroundColor: "rgba(29,161,242,1)",
-    borderRadius: 100,
+    backgroundColor: "#1A13E7",
+    borderRadius: 10,
     width: 117,
-    marginLeft:190,
-    marginTop:-40,
+    marginHorizontal:5,
+    
+    justifyContent: 'center', alignItems: 'center',
   },
   text5: {
     color: "rgba(255,255,255,1)",
     fontSize: 24,
-    alignSelf: "center"
+    justifyContent: 'center', alignItems: 'center',
   },
-  button1Row: {
-    height: 41,
-    flexDirection: "row",
-    marginTop: 402,
-    marginLeft: 31,
-    marginRight: 50
-  }
+  rect2: {
+    justifyContent: 'center', alignItems: 'center',
+  },
+  add1: {
+    justifyContent: 'center', alignItems: 'center',
+  },
+  text9: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+    marginTop:8
+  
+  },
+addWrapper:{position:'relative',
+width:60,
+height:60,
+backgroundColor:'#1A13E7',
+borderRadius:60,
+borderWidth:1,
+},
+addtext:{
+  position:'absolute',
+ width:100,
+height:60,
+textAlign:'center',
+color:"white",
+alignSelf:"center",
+paddingVertical:20
+
+
+},
+container1: {
+  flex: 1,
+  paddingTop: 40,
+  alignItems: "center"
+}
+ 
   });
 
+// const App = () => {
+//   const [selectedValue, setSelectedValue] = useState("java");
+//   return (
+  //   <View style={styles.container1}>
+  //     <Picker
+  //       selectedValue={selectedValue}
+  //       style={{ height: 50, width: 150 }}
+  //       onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+  //     >
+  //       <Picker.Item label="Java" value="java" />
+  //       <Picker.Item label="JavaScript" value="js" />
+  //     </Picker>
+  //   </View>
+  // );
+// }
 
+
+
+// export default App;
